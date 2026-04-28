@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import pandas as pd
-from .journal_nlp import extract_features_from_journal  # from earlier code
+from journal_nlp import extract_features_from_journal  # from earlier code
 
 # Load model + encoders
 model = joblib.load(r"D:\capstone project\model\mental_health_model.pkl")
