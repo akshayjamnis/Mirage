@@ -1,3 +1,4 @@
+
 document.getElementById("journalForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -5,7 +6,16 @@ document.getElementById("journalForm").addEventListener("submit", async (e) => {
   const gender = document.getElementById("gender").value;
   const journal = document.getElementById("journal").value;
 
+  const resultCard = document.getElementById("resultCard");
+  const stateEl = document.getElementById("state");
+  const confidenceEl = document.getElementById("confidence");
+
+  resultCard.classList.add("hidden");
+  stateEl.innerText = "Analyzing...";
+  confidenceEl.innerText = "...";
+
   try {
+    
     const response = await fetch("http://127.0.0.1:8000/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -14,12 +24,14 @@ document.getElementById("journalForm").addEventListener("submit", async (e) => {
 
     const data = await response.json();
 
-    document.getElementById("result").innerHTML = `
-      <b>Mental State:</b> ${data.mental_state}<br>
-      <b>Confidence:</b> ${data.confidence}%<br>
-    `;
+    stateEl.innerText = data.mental_state;
+    confidenceEl.innerText = data.confidence;
+
+    resultCard.classList.remove("hidden");
+
   } catch (error) {
-    document.getElementById("result").innerHTML =
-      "❌ Backend not reachable. Is FastAPI running?";
+    stateEl.innerText = "Error";
+    confidenceEl.innerText = "Backend not reachable";
+    resultCard.classList.remove("hidden");
   }
 });

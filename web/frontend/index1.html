@@ -1,0 +1,329 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  .mirage-wrap {
+    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+    padding: 2.5rem 1.5rem 3rem;
+    color: #fff;
+  }
+
+  .mirage-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .logo-ring {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    box-shadow: 0 0 32px rgba(167,139,250,0.45);
+    font-size: 28px;
+    animation: pulse-ring 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { box-shadow: 0 0 32px rgba(167,139,250,0.45); }
+    50% { box-shadow: 0 0 52px rgba(167,139,250,0.75), 0 0 20px rgba(96,165,250,0.4); }
+  }
+
+  .mirage-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    background: linear-gradient(90deg, #a78bfa, #60a5fa, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 0.4rem;
+  }
+
+  .mirage-sub {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
+
+  .card-shell {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(12px);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 1.4rem;
+  }
+
+  .field-group { display: flex; flex-direction: column; gap: 7px; }
+
+  .field-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .field-input, .field-select, .field-textarea {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 10px;
+    padding: 0.6rem 0.85rem;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+  }
+
+  .field-input::placeholder, .field-textarea::placeholder { color: rgba(255,255,255,0.28); }
+  .field-select option { background: #302b63; color: #fff; }
+
+  .field-input:focus, .field-select:focus, .field-textarea:focus {
+    border-color: rgba(167,139,250,0.6);
+    background: rgba(167,139,250,0.1);
+  }
+
+  .journal-wrap { margin-bottom: 1.6rem; }
+
+  .field-textarea {
+    width: 100%;
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .analyze-btn {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5, #0ea5e9);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .analyze-btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.2s;
+  }
+  .analyze-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .analyze-btn:active { transform: scale(0.98); }
+
+  .result-card {
+    max-width: 540px;
+    margin: 1.5rem auto 0;
+    border-radius: 18px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    animation: slide-up 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .result-card.hidden { display: none; }
+
+  .result-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 1.1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .result-icon { font-size: 18px; }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .result-row:last-child { border-bottom: none; }
+
+  .result-key {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 500;
+  }
+
+  .result-val {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #a78bfa;
+  }
+
+  .confidence-bar-wrap {
+    margin-top: 1rem;
+  }
+  .confidence-bar-bg {
+    height: 6px; border-radius: 99px;
+    background: rgba(255,255,255,0.1);
+    overflow: hidden;
+    margin-top: 0.4rem;
+  }
+  .confidence-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #a78bfa, #60a5fa);
+    width: 0%;
+    transition: width 0.7s cubic-bezier(0.16,1,0.3,1);
+  }
+  .confidence-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-top: 4px;
+  }
+
+  .mirage-footer {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.5px;
+  }
+
+  .mood-chips {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.4rem;
+  }
+  .chip {
+    padding: 5px 14px;
+    border-radius: 99px;
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.18s;
+    background: rgba(255,255,255,0.04);
+  }
+  .chip:hover, .chip.active {
+    background: rgba(167,139,250,0.2);
+    border-color: rgba(167,139,250,0.5);
+    color: #c4b5fd;
+  }
+  .chip-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 7px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+</style>
+
+
+
+<div class="mirage-wrap">
+  <div class="mirage-header">
+    <div class="logo-ring">
+  <img src="D:/capstone project/web\frontend/Copy of M (9).png" alt="Mirage logo" style="width: 200px; height: 200px; object-fit: contain; border-radius: 75%;" />
+</div>
+    <div class="mirage-title">Mirage</div>
+    <div class="mirage-sub">Understand yourself through your words</div>
+  </div>
+
+  <div class="card-shell">
+    <div class="row-2">
+      <div class="field-group">
+        <label class="field-label">Age</label>
+        <input class="field-input" type="number" id="age" placeholder="e.g. 24" required />
+      </div>
+      <div class="field-group">
+        <label class="field-label">Gender</label>
+        <select class="field-select" id="gender" required>
+          <option value="">Select</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-bottom: 1.4rem;">
+      <div class="chip-label">Today's mood</div>
+      <div class="mood-chips">
+        <span class="chip" onclick="toggleChip(this)">😌 Calm</span>
+        <span class="chip" onclick="toggleChip(this)">😟 Anxious</span>
+        <span class="chip" onclick="toggleChip(this)">😔 Low</span>
+        <span class="chip" onclick="toggleChip(this)">😤 Stressed</span>
+        <span class="chip" onclick="toggleChip(this)">😄 Happy</span>
+      </div>
+    </div>
+
+    <div class="field-group journal-wrap">
+      <label class="field-label">Your journal</label>
+      <textarea class="field-textarea" id="journal" placeholder="Write how your day felt... what's on your mind?" required></textarea>
+    </div>
+
+    <button class="analyze-btn" onclick="handleAnalyze()">Analyze</button>
+  </div>
+
+  <div id="resultCard" class="result-card hidden">
+    <div class="result-title"><span class="result-icon">📊</span> Your mental health summary</div>
+    <div class="result-row">
+      <span class="result-key">Status</span>
+      <span class="result-val" id="state">—</span>
+    </div>
+    <div class="confidence-bar-wrap">
+      <div class="result-row" style="border-bottom: none; padding-bottom: 0;">
+        <span class="result-key">Confidence</span>
+        <span class="result-val" id="confidence">—</span>
+      </div>
+      <div class="confidence-bar-bg">
+        <div class="confidence-bar-fill" id="confBar"></div>
+      </div>
+      <div class="confidence-label"><span>0%</span><span>100%</span></div>
+    </div>
+  </div>
+
+  <div class="mirage-footer">☺ Be happy, be healthy</div>
+</div>
+
+<script>
+function toggleChip(el) {
+  el.classList.toggle('active');
+}
+
+async function handleAnalyze() {
+  const age = document.getElementById('age').value;
+  const gender = document.getElementById('gender').value;
+  const journal = document.getElementById('journal').value;
+
+  if (!age || !gender || !journal) { alert('Please fill in all fields.'); return; }
+
+  // Trigger your script1.js form submit logic
+  const form = document.getElementById('journalForm');
+  form.dispatchEvent(new Event('submit'));
+}
+</script>

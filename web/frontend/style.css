@@ -1,34 +1,124 @@
-body {
-  font-family: Arial;
-  background: #f5f7fa;
-  padding: 40px;
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
-h2 {
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #333;
 }
 
-form {
-  max-width: 400px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-input, select, textarea, button {
+.app-container {
   width: 100%;
-  margin: 10px 0;
-  padding: 8px;
+  max-width: 480px;
+  padding: 20px;
 }
 
-button {
-  background: #4f46e5;
+h1 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #e0e0ff;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+input,
+select,
+textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #667eea;
+}
+
+.analyze-btn {
+  width: 100%;
+  padding: 12px;
+  background: #667eea;
   color: white;
   border: none;
+  border-radius: 10px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-#result {
+.analyze-btn:hover {
+  background: #5563d8;
+}
+
+.result-card {
   margin-top: 20px;
-  font-size: 18px;
+  background: #f7f9ff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.result-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #ddd;
+}
+
+@media (max-width: 500px) {
+  .row {
+    flex-direction: column;
+  }
 }

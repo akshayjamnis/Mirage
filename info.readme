@@ -1,0 +1,4 @@
+uvicorn web.backend.app:app --reload
+
+for the backend intiation
+

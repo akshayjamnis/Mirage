@@ -1,28 +1,214 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Mental Health Journal</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style2.css" />
 </head>
 <body>
-  <h2>Mental Health Journal Analyzer</h2>
 
-  <form id="journalForm">
-    <input type="number" id="age" placeholder="Age" required>
+  <div class="app-container">
+    <div class="logo-ring">
+  <img src="D:/capstone project/web/frontend/Copy of M (9).png" alt="Mirage logo" style="width: 150px; height: 150px; object-fit: contain; border-radius: 50%;" />
+</div>
+    <p class="subtitle">Analyze your mental health through your daily journal</p>
 
-    <select id="gender" required>
-      <option value="">Select Gender</option>
-      <option>Male</option>
-      <option>Female</option>
-    </select>
+    <div class="card">
+      <form id="journalForm">
 
-    <textarea id="journal" placeholder="Write your journal..." required></textarea>
+        <div class="row">
+          <div class="field">
+            <label>Age</label>
+            <input type="number" id="age" placeholder="Enter age" required />
+          </div>
 
-    <button type="submit">Analyze</button>
-  </form>
+          <div class="field">
+            <label>Gender</label>
+            <select id="gender" required>
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+        </div>
 
-  <div id="result"></div>
+        <div class="field-group" style="margin-bottom: 1.4rem;">
+      <div class="chip-label">Today's mood</div>
+      <div class="mood-chips">
+        <span class="chip" onclick="toggleChip(this)">😌 Calm</span>
+        <span class="chip" onclick="toggleChip(this)">😟 Anxious</span>
+        <span class="chip" onclick="toggleChip(this)">😔 Low</span>
+        <span class="chip" onclick="toggleChip(this)">😤 Stressed</span>
+        <span class="chip" onclick="toggleChip(this)">😄 Happy</span>
+      </div>
+    </div>
+
+        <div class="field">
+          <label>Your Journal</label>
+          <textarea
+            id="journal"
+            placeholder="Write how your day felt..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="analyze-btn">
+          Analyze My Mental Health
+        </button>
+
+      </form>
+    </div>
+
+    <div id="resultCard" class="result-card hidden">
+      <h3>📊 Your Mental Health Summary</h3>
+      <p><b>Status:</b> <span id="state"></span></p>
+      <p><b>Confidence:</b> <span id="confidence"></span>%</p>
+    </div>
+
+    <footer>
+      <p>☺️ Be happy, be healthy!</p>
+    </footer>
+  </div>
+  <div class="emotion-panel">
+      <div class="emotion-panel-header">
+        <span class="panel-icon">💡</span>
+        <h2>Emotion Guide</h2>
+        <p>Understanding what your feelings mean</p>
+      </div>
+
+      <div class="emotion-list">
+
+        <div class="emotion-item" onclick="toggleEmotion(this)">
+          <div class="emotion-top">
+            <span class="emotion-emoji">😌</span>
+            <div>
+              <div class="emotion-name">Calm</div>
+              <div class="emotion-tag tag-green">Positive</div>
+            </div>
+            <span class="emotion-arrow">›</span>
+          </div>
+          <div class="emotion-desc">
+            A state of peace and relaxation. Your mind is at ease, stress levels are low and you feel centered and in control of your thoughts.
+          </div>
+        </div>
+
+        <div class="emotion-item" onclick="toggleEmotion(this)">
+          <div class="emotion-top">
+            <span class="emotion-emoji">😄</span>
+            <div>
+              <div class="emotion-name">Happy</div>
+              <div class="emotion-tag tag-green">Positive</div>
+            </div>
+            <span class="emotion-arrow">›</span>
+          </div>
+          <div class="emotion-desc">
+            A feeling of joy and contentment. You are experiencing positive emotions, high energy and a general sense of wellbeing and satisfaction.
+          </div>
+        </div>
+
+        <div class="emotion-item" onclick="toggleEmotion(this)">
+          <div class="emotion-top">
+            <span class="emotion-emoji">😟</span>
+            <div>
+              <div class="emotion-name">Anxious</div>
+              <div class="emotion-tag tag-yellow">Caution</div>
+            </div>
+            <span class="emotion-arrow">›</span>
+          </div>
+          <div class="emotion-desc">
+            A sense of worry or unease about something uncertain. Often involves racing thoughts, tension in the body and a feeling of dread or nervousness.
+          </div>
+        </div>
+
+        <div class="emotion-item" onclick="toggleEmotion(this)">
+          <div class="emotion-top">
+            <span class="emotion-emoji">😤</span>
+            <div>
+              <div class="emotion-name">Stressed</div>
+              <div class="emotion-tag tag-yellow">Caution</div>
+            </div>
+            <span class="emotion-arrow">›</span>
+          </div>
+          <div class="emotion-desc">
+            Feeling overwhelmed by demands or pressure. Stress can affect sleep, focus and mood. Try deep breathing or short breaks to reset.
+          </div>
+        </div>
+
+        <div class="emotion-item" onclick="toggleEmotion(this)">
+          <div class="emotion-top">
+            <span class="emotion-emoji">😔</span>
+            <div>
+              <div class="emotion-name">Sad</div>
+              <div class="emotion-tag tag-red">Low</div>
+            </div>
+            <span class="emotion-arrow">›</span>
+          </div>
+          <div class="emotion-desc">
+            Feeling down, heavy or hopeless. Sadness is a natural emotion but if persistent it may need attention. Talking to someone can help greatly.
+          </div>
+        </div>
+
+        <div class="emotion-item" onclick="toggleEmotion(this)">
+          <div class="emotion-top">
+            <span class="emotion-emoji">😡</span>
+            <div>
+              <div class="emotion-name">Angry</div>
+              <div class="emotion-tag tag-red">Low</div>
+            </div>
+            <span class="emotion-arrow">›</span>
+          </div>
+          <div class="emotion-desc">
+            Intense feelings of frustration or rage. Anger often signals that a boundary has been crossed. Pause before reacting and identify the root cause.
+          </div>
+        </div>
+
+        <div class="emotion-item" onclick="toggleEmotion(this)">
+          <div class="emotion-top">
+            <span class="emotion-emoji">😴</span>
+            <div>
+              <div class="emotion-name">Fatigued</div>
+              <div class="emotion-tag tag-yellow">Caution</div>
+            </div>
+            <span class="emotion-arrow">›</span>
+          </div>
+          <div class="emotion-desc">
+            Mental or physical exhaustion that goes beyond just being tired. May indicate burnout or poor sleep. Rest, hydration and light movement can help.
+          </div>
+        </div>
+
+        <div class="emotion-item" onclick="toggleEmotion(this)">
+          <div class="emotion-top">
+            <span class="emotion-emoji">🤗</span>
+            <div>
+              <div class="emotion-name">Grateful</div>
+              <div class="emotion-tag tag-green">Positive</div>
+            </div>
+            <span class="emotion-arrow">›</span>
+          </div>
+          <div class="emotion-desc">
+            Feeling thankful and appreciative of people or moments in your life. Gratitude is strongly linked to improved mental health and life satisfaction.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="panel-tip">
+        <span>🧘</span>
+        <p>Tip: Journaling daily for just 5 minutes can significantly reduce anxiety and improve emotional clarity over time.</p>
+      </div>
+
+    </div>
+
+  </div>
 
   <script src="script1.js"></script>
+  <script>
+  function toggleEmotion(el) {
+    el.classList.toggle('open');
+  }
+</script>
+
 </body>
 </html>
+
